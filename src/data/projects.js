@@ -50,6 +50,10 @@ export const projects = [
     ],
     stack: ["Python", "Streamlit", "scikit-learn"],
     video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    images: [
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+    ],
     links: [
       { type: "streamlit", label: "Streamlit", href: "https://streamlit.io" },
       { type: "github", label: "GitHub", href: "https://github.com" },

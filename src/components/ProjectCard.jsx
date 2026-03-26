@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 const linkTypeStyles = {
   github: "bg-black text-white hover:opacity-90",
   website: "bg-zinc-50 text-zinc-950 hover:brightness-95",
@@ -8,6 +10,7 @@ const linkTypeStyles = {
 }
 
 function ProjectCard({ project, isFeatured }) {
+  const [isExpanded, setIsExpanded] = useState(false)
   if (!project) return null
 
   return (
@@ -93,18 +96,27 @@ function ProjectCard({ project, isFeatured }) {
       </div>
 
       {isFeatured && project.challenges?.length ? (
-        <div className="mt-6 rounded-2xl bg-zinc-100 p-4 dark:bg-zinc-800/60">
-          <h4 className="text-sm font-medium text-zinc-900 dark:text-zinc-100">Engineering challenges</h4>
-          <div className="mt-3 space-y-3">
-            {project.challenges.map((challenge) => (
-              <div key={challenge.title} className="text-sm text-zinc-700 dark:text-zinc-300">
-                <p className="font-medium text-zinc-900 dark:text-zinc-100">{challenge.title}</p>
-                <p><span className="font-medium">Problem:</span> {challenge.problem}</p>
-                <p><span className="font-medium">Cause:</span> {challenge.cause}</p>
-                <p><span className="font-medium">Solution:</span> {challenge.solution}</p>
-                <p><span className="font-medium">Outcome:</span> {challenge.outcome}</p>
-              </div>
-            ))}
+        <div className="mt-6 rounded-2xl border border-zinc-200 bg-zinc-100 p-4 dark:border-zinc-700 dark:bg-zinc-800/60">
+          <button
+            type="button"
+            onClick={() => setIsExpanded((state) => !state)}
+            className="inline-flex items-center rounded-xl border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition-all duration-200 hover:border-zinc-400 dark:border-zinc-600 dark:text-zinc-100 dark:hover:border-zinc-500"
+          >
+            {isExpanded ? "Hide Details" : "View Details"}
+          </button>
+          <div className={`transition-all duration-200 overflow-hidden ${isExpanded ? "max-h-[1000px] mt-4" : "max-h-0"}`}>
+            <h4 className="text-sm font-medium text-zinc-900 dark:text-zinc-100">Engineering challenges</h4>
+            <div className="mt-3 space-y-3">
+              {project.challenges.map((challenge) => (
+                <div key={challenge.title} className="text-sm text-zinc-700 dark:text-zinc-300">
+                  <p className="font-medium text-zinc-900 dark:text-zinc-100">{challenge.title}</p>
+                  <p><span className="font-medium">Problem:</span> {challenge.problem}</p>
+                  <p><span className="font-medium">Cause:</span> {challenge.cause}</p>
+                  <p><span className="font-medium">Solution:</span> {challenge.solution}</p>
+                  <p><span className="font-medium">Outcome:</span> {challenge.outcome}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       ) : null}
