@@ -5,7 +5,7 @@ function Footer() {
         <a
           href="https://github.com/aoaye"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="text-blue-700 transition hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-200"
         >
           GitHub
@@ -13,7 +13,7 @@ function Footer() {
         <a
           href="https://www.linkedin.com"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="text-blue-700 transition hover:text-blue-600 dark:text-blue-300 dark:hover:text-blue-200"
         >
           LinkedIn

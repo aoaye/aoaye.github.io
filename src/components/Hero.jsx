@@ -1,6 +1,6 @@
 function Hero() {
   return (
-    <section className="py-20 md:py-24 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+    <header className="py-20 md:py-24 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
       <div>
         <p className="inline-flex rounded-full bg-blue-500/10 px-3 py-1 text-xs md:text-sm font-medium text-blue-600 dark:text-blue-300">
           Open to work
@@ -30,7 +30,7 @@ function Hero() {
         alt="Profile portrait"
         className="h-36 w-36 md:h-48 md:w-48 rounded-full object-cover border border-zinc-200 dark:border-zinc-800"
       />
-    </section>
+    </header>
   )
 }
 
