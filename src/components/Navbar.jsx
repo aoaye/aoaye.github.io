@@ -21,12 +21,18 @@ function Navbar() {
 
     const updateActive = () => {
       if (!sections.length) return
-      const threshold = 140
+      const marker = window.innerHeight * 0.35
 
       let current = sections[0].href
       for (const section of sections) {
-        const top = section.element.getBoundingClientRect().top
-        if (top <= threshold) current = section.href
+        const rect = section.element.getBoundingClientRect()
+        if (rect.top <= marker && rect.bottom >= marker) {
+          current = section.href
+          break
+        }
+        if (rect.top <= marker) {
+          current = section.href
+        }
       }
 
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {

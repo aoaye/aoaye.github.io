@@ -1,14 +1,6 @@
 import { useState } from "react"
 import Gallery from "./Gallery"
-
-const linkTypeStyles = {
-  github: "bg-black text-white hover:opacity-90",
-  website: "bg-zinc-50 text-zinc-950 hover:brightness-95",
-  streamlit: "bg-red-600 text-white hover:bg-red-700",
-  linkedin: "bg-blue-600 text-white hover:bg-blue-700",
-  youtube: "bg-red-600 text-white hover:bg-red-700",
-  download: "bg-zinc-800 text-zinc-50 hover:bg-zinc-700",
-}
+import { linkTypeStyles, renderLinkTypeIcon } from "../utils/iconMaps"
 
 function ProjectCard({ project, isFeatured }) {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -73,7 +65,8 @@ function ProjectCard({ project, isFeatured }) {
       ) : null}
 
       <div className="mt-6 flex flex-wrap gap-3">
-        {project.links?.map((link) => (
+        {project.links?.map((link) => {
+          return (
           <a
             key={`${project.title}-${link.type}`}
             href={link.href}
@@ -81,9 +74,11 @@ function ProjectCard({ project, isFeatured }) {
             rel="noopener noreferrer"
             className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ${linkTypeStyles[link.type] ?? "bg-zinc-700 text-zinc-50 hover:bg-zinc-600"}`}
           >
+            {renderLinkTypeIcon(link.type, "h-4 w-4")}
             {link.label}
           </a>
-        ))}
+          )
+        })}
       </div>
 
       {!isFeatured && hasDetailContent ? (

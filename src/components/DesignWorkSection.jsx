@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { createPortal } from "react-dom"
 import Gallery from "./Gallery"
+import { linkTypeStyles, renderLinkTypeIcon } from "../utils/iconMaps"
 
 function DesignCard({ item }) {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -39,17 +40,20 @@ function DesignCard({ item }) {
       </button>
 
       <div className="mt-5 flex flex-wrap gap-3">
-        {item.links.map((link) => (
-          <a
-            key={`${item.title}-${link.label}`}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-zinc-800 px-4 py-2.5 text-sm font-medium text-zinc-50 transition hover:bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-900 dark:hover:bg-zinc-300"
-          >
-            {link.label}
-          </a>
-        ))}
+        {item.links.map((link) => {
+          return (
+            <a
+              key={`${item.title}-${link.label}`}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ${linkTypeStyles[link.type] ?? "bg-zinc-700 text-zinc-50 hover:bg-zinc-600"}`}
+            >
+              {renderLinkTypeIcon(link.type, "h-4 w-4")}
+              {link.label}
+            </a>
+          )
+        })}
       </div>
 
       <div className="mt-6 rounded-2xl border border-zinc-200 bg-zinc-100 p-4 dark:border-zinc-700 dark:bg-zinc-800/60">
