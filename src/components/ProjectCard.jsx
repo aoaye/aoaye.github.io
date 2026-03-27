@@ -14,6 +14,8 @@ function ProjectCard({ project, isFeatured }) {
   const [isExpanded, setIsExpanded] = useState(false)
   if (!project) return null
 
+  const hasDetailContent = Boolean(project.video || project.images?.length || project.challenges?.length)
+
   return (
     <article className="rounded-3xl border border-zinc-200 bg-white p-6 md:p-7 transition-all duration-200 hover:scale-[1.01] hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700">
       <h3 className="text-xl md:text-2xl font-semibold text-zinc-950 dark:text-zinc-50">{project.title}</h3>
@@ -54,7 +56,7 @@ function ProjectCard({ project, isFeatured }) {
         ))}
       </div>
 
-      {project.video ? (
+      {isFeatured && project.video ? (
         <div className="mt-5 overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
           <iframe
             src={project.video}
@@ -83,6 +85,49 @@ function ProjectCard({ project, isFeatured }) {
           </a>
         ))}
       </div>
+
+      {!isFeatured && hasDetailContent ? (
+        <div className="mt-6 rounded-2xl border border-zinc-200 bg-zinc-100 p-4 dark:border-zinc-700 dark:bg-zinc-800/60">
+          <button
+            type="button"
+            onClick={() => setIsExpanded((state) => !state)}
+            aria-expanded={isExpanded}
+            className="inline-flex items-center rounded-xl border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition-all duration-200 hover:border-zinc-400 dark:border-zinc-600 dark:text-zinc-100 dark:hover:border-zinc-500"
+          >
+            {isExpanded ? "Hide Details" : "View Details"}
+          </button>
+          <div className={`transition-all duration-200 overflow-hidden ${isExpanded ? "max-h-[1400px] mt-4" : "max-h-0"}`}>
+            {project.video ? (
+              <div className="overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
+                <iframe
+                  src={project.video}
+                  title={`${project.title} demo`}
+                  className="aspect-video w-full"
+                  loading="lazy"
+                  allowFullScreen
+                />
+              </div>
+            ) : null}
+            {project.images?.length ? <Gallery images={project.images} title={project.title} /> : null}
+            {project.challenges?.length ? (
+              <div className="mt-4">
+                <h4 className="text-sm font-medium text-zinc-900 dark:text-zinc-100">Engineering challenges</h4>
+                <div className="mt-3 space-y-3">
+                  {project.challenges.map((challenge) => (
+                    <div key={challenge.title} className="text-sm text-zinc-700 dark:text-zinc-300">
+                      <p className="font-medium text-zinc-900 dark:text-zinc-100">{challenge.title}</p>
+                      <p><span className="font-medium">Problem:</span> {challenge.problem}</p>
+                      <p><span className="font-medium">Cause:</span> {challenge.cause}</p>
+                      <p><span className="font-medium">Solution:</span> {challenge.solution}</p>
+                      <p><span className="font-medium">Outcome:</span> {challenge.outcome}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
 
       {isFeatured && project.challenges?.length ? (
         <div className="mt-6 rounded-2xl border border-zinc-200 bg-zinc-100 p-4 dark:border-zinc-700 dark:bg-zinc-800/60">

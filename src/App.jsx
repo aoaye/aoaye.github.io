@@ -5,8 +5,9 @@ import AboutSection from "./components/AboutSection"
 import TechStackToolsSection from "./components/TechStackToolsSection"
 import FeaturedProjects from "./components/FeaturedProjects"
 import OtherProjects from "./components/OtherProjects"
+import DesignWorkSection from "./components/DesignWorkSection"
 import Footer from "./components/Footer"
-import { projects } from "./data/projects"
+import { aboutContent, designWork, footerContent, heroContent, projects, techStackContent } from "./data/projects"
 
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark")
@@ -25,7 +26,7 @@ function App() {
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
       <Navbar />
-      <Hero />
+      <Hero content={heroContent} />
       <button
         type="button"
         onClick={() => setTheme((value) => (value === "dark" ? "light" : "dark"))}
@@ -34,12 +35,13 @@ function App() {
         {theme === "dark" ? "Light" : "Dark"}
       </button>
       <main className="mx-auto max-w-7xl px-4 md:px-6 xl:px-8">
-        <AboutSection />
-        <TechStackToolsSection />
+        <AboutSection content={aboutContent} />
+        <TechStackToolsSection content={techStackContent} />
         <FeaturedProjects projects={featuredProjects} />
         <OtherProjects projects={otherProjects} />
+        <DesignWorkSection items={designWork} />
       </main>
-      <Footer />
+      <Footer content={footerContent} />
     </div>
   )
 }

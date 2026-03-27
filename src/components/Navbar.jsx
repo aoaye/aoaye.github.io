@@ -5,6 +5,7 @@ const navItems = [
   { href: "#tech-stack", label: "Tech Stack" },
   { href: "#featured-projects", label: "Featured Projects" },
   { href: "#other-projects", label: "Other Projects" },
+  { href: "#design-work", label: "Design Work" },
 ]
 
 function Navbar() {
