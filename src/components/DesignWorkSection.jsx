@@ -136,9 +136,6 @@ function DesignWorkSection({ items }) {
       <h2 id="design-work-heading" className="text-2xl md:text-3xl font-semibold text-zinc-950 dark:text-zinc-50">
         Design Work
       </h2>
-      <p className="mt-3 max-w-2xl text-sm md:text-base text-zinc-600 dark:text-zinc-400">
-        Product and brand design explorations with conversion, education, and visual systems in mind.
-      </p>
       <div className="mt-8 grid gap-8 md:grid-cols-2">
         {items.map((item) => (
           <DesignCard key={item.title} item={item} />
