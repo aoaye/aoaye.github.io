@@ -18,8 +18,6 @@ import jobfindShot86 from "../assets/jobfind/Screenshot (86).png"
 import jobfindShot87 from "../assets/jobfind/Screenshot (87).png"
 import jobfindShot88 from "../assets/jobfind/Screenshot (88).png"
 
-const PLACEHOLDER_VIDEO = "https://www.youtube.com/embed/ysz5S6PUM-U"
-
 const carvisionGlob = import.meta.glob("../assets/carvision/*.{png,jpg,jpeg}", { eager: true, import: "default" })
 const versaiGlob = import.meta.glob("../assets/versai/*.{png,jpg,jpeg}", { eager: true, import: "default" })
 const puredentGlob = import.meta.glob("../assets/puredent/*.{png,jpg,jpeg}", { eager: true, import: "default" })
@@ -280,7 +278,7 @@ export const projects = [
       "Whisper",
       "AWS Transcribe",
     ],
-    video: PLACEHOLDER_VIDEO,
+    video: null,
     demoImage: null,
     images: galleryUrls(versaiGlob, { excludeFeature: false }),
     links: [
