@@ -4,13 +4,43 @@ import carvisionFeature from "../assets/carvision/feature.png"
 import blwireFeature from "../assets/blwire/feature.png"
 import jobfindFeature from "../assets/jobfind/feature.png"
 
+import blwireShot80 from "../assets/blwire/Screenshot (80).png"
+import blwireShot81 from "../assets/blwire/Screenshot (81).png"
+import blwireShot82 from "../assets/blwire/Screenshot (82).png"
+import blwireShot83 from "../assets/blwire/Screenshot (83).png"
+import blwireShot85 from "../assets/blwire/Screenshot (85).png"
+import blwireShot86 from "../assets/blwire/Screenshot (86).png"
+
+import jobfindShot20260328_015512 from "../assets/jobfind/Screenshot 2026-03-28 015512.png"
+import jobfindShot20260328_015528 from "../assets/jobfind/Screenshot 2026-03-28 015528.png"
+import jobfindShot85 from "../assets/jobfind/Screenshot (85).png"
+import jobfindShot86 from "../assets/jobfind/Screenshot (86).png"
+import jobfindShot87 from "../assets/jobfind/Screenshot (87).png"
+import jobfindShot88 from "../assets/jobfind/Screenshot (88).png"
+
 const PLACEHOLDER_VIDEO = "https://www.youtube.com/embed/ysz5S6PUM-U"
 
 const carvisionGlob = import.meta.glob("../assets/carvision/*.{png,jpg,jpeg}", { eager: true, import: "default" })
-const blwireGlob = import.meta.glob("../assets/blwire/*.{png,jpg,jpeg}", { eager: true, import: "default" })
 const versaiGlob = import.meta.glob("../assets/versai/*.{png,jpg,jpeg}", { eager: true, import: "default" })
-const jobfindGlob = import.meta.glob("../assets/jobfind/*.{png,jpg,jpeg}", { eager: true, import: "default" })
 const puredentGlob = import.meta.glob("../assets/puredent/*.{png,jpg,jpeg}", { eager: true, import: "default" })
+
+const blwireGalleryImages = [
+  blwireShot80,
+  blwireShot81,
+  blwireShot82,
+  blwireShot83,
+  blwireShot85,
+  blwireShot86,
+]
+
+const jobfindGalleryImages = [
+  jobfindShot20260328_015512,
+  jobfindShot20260328_015528,
+  jobfindShot85,
+  jobfindShot86,
+  jobfindShot87,
+  jobfindShot88,
+]
 
 function galleryUrls(glob, { excludeFeature = true } = {}) {
   return Object.entries(glob)
@@ -184,7 +214,7 @@ export const projects = [
     stack: ["React", "JavaScript", "Node.js", "Express", "Multer", "Railway"],
     video: null,
     demoImage: blwireFeature,
-    images: galleryUrls(blwireGlob),
+    images: blwireGalleryImages,
     links: [
       { type: "github", label: "GitHub", href: "https://github.com/aoaye/blw_ireland_website" },
       { type: "website", label: "Website", href: "https://blwirelandzone.org/" },
@@ -367,7 +397,7 @@ export const projects = [
     stack: ["HTML", "CSS", "JavaScript", "PHP", "MariaDB"],
     video: null,
     demoImage: jobfindFeature,
-    images: galleryUrls(jobfindGlob),
+    images: jobfindGalleryImages,
     links: [
       { type: "github", label: "GitHub", href: "https://github.com/aoaye/jobfind" },
       { type: "website", label: "Live site", href: "https://jobfind.infinityfreeapp.com/" },
