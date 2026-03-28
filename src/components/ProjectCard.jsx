@@ -6,7 +6,9 @@ function ProjectCard({ project, isFeatured }) {
   const [isExpanded, setIsExpanded] = useState(false)
   if (!project) return null
 
-  const hasDetailContent = Boolean(project.video || project.images?.length || project.challenges?.length)
+  const hasDetailContent = Boolean(
+    project.video || project.demoImage || project.images?.length || project.challenges?.length,
+  )
 
   return (
     <article className="rounded-3xl border border-zinc-200 bg-white p-6 md:p-7 transition-all duration-200 hover:scale-[1.01] hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700">
@@ -48,15 +50,24 @@ function ProjectCard({ project, isFeatured }) {
         ))}
       </div>
 
-      {isFeatured && project.video ? (
+      {isFeatured && (project.demoImage || project.video) ? (
         <div className="mt-5 overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
-          <iframe
-            src={project.video}
-            title={`${project.title} demo`}
-            className="aspect-video w-full"
-            loading="lazy"
-            allowFullScreen
-          />
+          {project.demoImage ? (
+            <img
+              src={project.demoImage}
+              alt={`${project.title} demo preview`}
+              className="aspect-video w-full object-cover"
+              loading="lazy"
+            />
+          ) : (
+            <iframe
+              src={project.video}
+              title={`${project.title} demo`}
+              className="aspect-video w-full"
+              loading="lazy"
+              allowFullScreen
+            />
+          )}
         </div>
       ) : null}
 
@@ -68,7 +79,7 @@ function ProjectCard({ project, isFeatured }) {
         {project.links?.map((link) => {
           return (
           <a
-            key={`${project.title}-${link.type}`}
+            key={`${project.title}-${link.type}-${link.label}`}
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
@@ -92,7 +103,17 @@ function ProjectCard({ project, isFeatured }) {
             {isExpanded ? "Hide Details" : "View Details"}
           </button>
           <div className={`transition-all duration-200 overflow-hidden ${isExpanded ? "max-h-[1400px] mt-4" : "max-h-0"}`}>
-            {project.video ? (
+            {project.demoImage ? (
+              <div className="overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
+                <img
+                  src={project.demoImage}
+                  alt={`${project.title} demo preview`}
+                  className="aspect-video w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ) : null}
+            {project.video && !project.demoImage ? (
               <div className="overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
                 <iframe
                   src={project.video}

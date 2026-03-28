@@ -1,9 +1,23 @@
+import profilePic from "../assets/profile_pic.jpg"
+import puredentFeature from "../assets/puredent/feature.png"
+import carvisionFeature from "../assets/carvision/feature.png"
+import blwireFeature from "../assets/blwire/feature.png"
+import jobfindFeature from "../assets/jobfind/feature.png"
+
 const PLACEHOLDER_VIDEO = "https://www.youtube.com/embed/ysz5S6PUM-U"
-const PLACEHOLDER_IMAGE_MAIN =
-  "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
-const PLACEHOLDER_IMAGE_ALT =
-  "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80"
-const PLACEHOLDER_LINK = "https://example.com"
+
+const carvisionGlob = import.meta.glob("../assets/carvision/*.{png,jpg,jpeg}", { eager: true, import: "default" })
+const blwireGlob = import.meta.glob("../assets/blwire/*.{png,jpg,jpeg}", { eager: true, import: "default" })
+const versaiGlob = import.meta.glob("../assets/versai/*.{png,jpg,jpeg}", { eager: true, import: "default" })
+const jobfindGlob = import.meta.glob("../assets/jobfind/*.{png,jpg,jpeg}", { eager: true, import: "default" })
+const puredentGlob = import.meta.glob("../assets/puredent/*.{png,jpg,jpeg}", { eager: true, import: "default" })
+
+function galleryUrls(glob, { excludeFeature = true } = {}) {
+  return Object.entries(glob)
+    .filter(([path]) => !excludeFeature || !path.includes("feature"))
+    .map(([, url]) => url)
+    .sort()
+}
 
 export const heroContent = {
   name: "Aoaye Imoagene",
@@ -13,10 +27,11 @@ export const heroContent = {
   summary:
     "Building practical products with clear UX, strong engineering quality, and measurable outcomes.",
   coreStack: ["Python", "JavaScript", "C#", "TensorFlow", "Docker", "AWS"],
+  profileImage: profilePic,
   socials: [
     { type: "github", href: "https://github.com/aoaye" },
     { type: "linkedin", href: "https://www.linkedin.com/in/aoaye-imoagene/" },
-    { type: "x", href: PLACEHOLDER_LINK },
+    { type: "x", href: "https://x.com/aoaye_i?s=09" },
   ],
 }
 
@@ -108,8 +123,9 @@ export const projects = [
       "NumPy",
       "OpenCV",
     ],
-    video: PLACEHOLDER_VIDEO,
-    images: [PLACEHOLDER_IMAGE_MAIN, PLACEHOLDER_IMAGE_ALT],
+    video: null,
+    demoImage: carvisionFeature,
+    images: galleryUrls(carvisionGlob),
     links: [
       { type: "github", label: "GitHub", href: "https://github.com/aoaye/Capstone_Project_CompSci25" },
       { type: "streamlit", label: "Streamlit", href: "http://carvision.streamlit.app/" },
@@ -166,8 +182,9 @@ export const projects = [
       "Instagram content integration in public-facing pages",
     ],
     stack: ["React", "JavaScript", "Node.js", "Express", "Multer", "Railway"],
-    video: PLACEHOLDER_VIDEO,
-    images: [PLACEHOLDER_IMAGE_ALT, PLACEHOLDER_IMAGE_MAIN],
+    video: null,
+    demoImage: blwireFeature,
+    images: galleryUrls(blwireGlob),
     links: [
       { type: "github", label: "GitHub", href: "https://github.com/aoaye/blw_ireland_website" },
       { type: "website", label: "Website", href: "https://blwirelandzone.org/" },
@@ -234,7 +251,8 @@ export const projects = [
       "AWS Transcribe",
     ],
     video: PLACEHOLDER_VIDEO,
-    images: [PLACEHOLDER_IMAGE_MAIN, PLACEHOLDER_IMAGE_ALT],
+    demoImage: null,
+    images: galleryUrls(versaiGlob, { excludeFeature: false }),
     links: [
       { type: "github", label: "GitHub", href: "https://github.com/Ucheyo/openlp-ai" },
       { type: "download", label: "Installer", href: "https://versaidownload.com/" },
@@ -291,12 +309,10 @@ export const projects = [
       "Interactive fixture-level prediction interface",
     ],
     stack: ["Python", "Scikit-learn", "Pandas", "NumPy", "Seaborn", "Streamlit"],
-    video: PLACEHOLDER_VIDEO,
-    images: [PLACEHOLDER_IMAGE_ALT, PLACEHOLDER_IMAGE_MAIN],
-    links: [
-      { type: "github", label: "GitHub", href: PLACEHOLDER_LINK },
-      { type: "streamlit", label: "Streamlit", href: PLACEHOLDER_LINK },
-    ],
+    video: null,
+    demoImage: null,
+    images: [],
+    links: [],
     challenges: [
       {
         title: "Predicting draw outcomes",
@@ -349,9 +365,13 @@ export const projects = [
       "Role-aware authentication and redirect logic",
     ],
     stack: ["HTML", "CSS", "JavaScript", "PHP", "MariaDB"],
-    video: PLACEHOLDER_VIDEO,
-    images: [PLACEHOLDER_IMAGE_MAIN, PLACEHOLDER_IMAGE_ALT],
-    links: [{ type: "github", label: "GitHub", href: "https://github.com/aoaye/jobfind" }],
+    video: null,
+    demoImage: jobfindFeature,
+    images: galleryUrls(jobfindGlob),
+    links: [
+      { type: "github", label: "GitHub", href: "https://github.com/aoaye/jobfind" },
+      { type: "website", label: "Live site", href: "https://jobfind.infinityfreeapp.com/" },
+    ],
     challenges: [
       {
         title: "Multi-role authentication and flow control",
@@ -397,9 +417,10 @@ export const projects = [
       "Transfer audit history and input validation",
     ],
     stack: ["C#", "WPF", ".NET Framework 4.7.2", "ADO.NET", "SQL Server"],
-    video: PLACEHOLDER_VIDEO,
-    images: [PLACEHOLDER_IMAGE_ALT, PLACEHOLDER_IMAGE_MAIN],
-    links: [{ type: "github", label: "GitHub", href: PLACEHOLDER_LINK }],
+    video: null,
+    demoImage: null,
+    images: [],
+    links: [],
     challenges: [
       {
         title: "Layered architecture maintainability",
@@ -440,8 +461,19 @@ export const designWork = [
     date: "February 2026",
     description:
       "A modern UI/UX concept for a fluoride-alternative toothpaste brand focused on education and conversion.",
-    mainImage: PLACEHOLDER_IMAGE_MAIN,
-    links: [{ type: "website", label: "Figma", href: PLACEHOLDER_LINK }],
+    mainImage: puredentFeature,
+    links: [
+      {
+        type: "website",
+        label: "Figma file",
+        href: "https://www.figma.com/design/IwYH6bWQBCN6qmBO8Vff5z/Puredent?node-id=0-1&t=cJkIxkmIrdoMeTxZ-1",
+      },
+      {
+        type: "website",
+        label: "Prototype",
+        href: "https://www.figma.com/proto/IwYH6bWQBCN6qmBO8Vff5z/Puredent?node-id=1-2&p=f&viewport=372%2C272%2C0.07&t=bBASKax2QZ2AaC3A-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A2&page-id=0%3A1",
+      },
+    ],
     details: {
       overview:
         "Designed a clean, conversion-focused interface that balances product commerce with education and campaign storytelling.",
@@ -460,6 +492,6 @@ export const designWork = [
       tools: ["Figma"],
       status: "Design completed; website development in progress.",
     },
-    images: [PLACEHOLDER_IMAGE_ALT, PLACEHOLDER_IMAGE_MAIN],
+    images: galleryUrls(puredentGlob),
   },
 ]
