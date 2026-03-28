@@ -1,12 +1,27 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
 
 function Gallery({ images = [], title }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [overlayIndex, setOverlayIndex] = useState(null)
+  const itemRefs = useRef([])
+  const skipInitialScroll = useRef(true)
 
   const prev = () => setActiveIndex((idx) => (idx === 0 ? images.length - 1 : idx - 1))
   const next = () => setActiveIndex((idx) => (idx === images.length - 1 ? 0 : idx + 1))
+
+  useEffect(() => {
+    if (skipInitialScroll.current) {
+      skipInitialScroll.current = false
+      return
+    }
+    itemRefs.current[activeIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    })
+  }, [activeIndex])
 
   useEffect(() => {
     if (overlayIndex === null) return undefined
@@ -33,16 +48,18 @@ function Gallery({ images = [], title }) {
         <button
           type="button"
           onClick={prev}
-          className="rounded-xl border border-zinc-300 px-3 py-2 text-xs text-zinc-700 transition hover:border-zinc-400 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-600"
+          aria-label="Previous image"
+          className="inline-flex items-center justify-center rounded-xl border border-zinc-300 p-2 text-zinc-700 transition hover:border-zinc-400 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-600"
         >
-          Prev
+          <FiChevronLeft className="h-5 w-5" aria-hidden />
         </button>
         <button
           type="button"
           onClick={next}
-          className="rounded-xl border border-zinc-300 px-3 py-2 text-xs text-zinc-700 transition hover:border-zinc-400 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-600"
+          aria-label="Next image"
+          className="inline-flex items-center justify-center rounded-xl border border-zinc-300 p-2 text-zinc-700 transition hover:border-zinc-400 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-600"
         >
-          Next
+          <FiChevronRight className="h-5 w-5" aria-hidden />
         </button>
       </div>
 
@@ -50,6 +67,9 @@ function Gallery({ images = [], title }) {
         {images.map((src, idx) => (
           <button
             key={src}
+            ref={(el) => {
+              itemRefs.current[idx] = el
+            }}
             type="button"
             onClick={() => setOverlayIndex(idx)}
             className={`snap-start shrink-0 overflow-hidden rounded-2xl border transition-all duration-200 ${idx === activeIndex ? "border-blue-500 shadow-md" : "border-zinc-200 dark:border-zinc-800"}`}

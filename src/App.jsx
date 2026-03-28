@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { FiMoon, FiSun } from "react-icons/fi"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import AboutSection from "./components/AboutSection"
@@ -30,9 +31,14 @@ function App() {
       <button
         type="button"
         onClick={() => setTheme((value) => (value === "dark" ? "light" : "dark"))}
-        className="fixed bottom-6 right-6 z-50 rounded-full border border-zinc-300 bg-white/95 px-4 py-3 text-sm font-medium text-zinc-800 shadow-lg transition hover:scale-[1.03] dark:border-zinc-700 dark:bg-zinc-900/95 dark:text-zinc-100"
+        aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        className="fixed bottom-6 right-6 z-50 inline-flex items-center justify-center rounded-full border border-zinc-300 bg-white/95 p-3 text-zinc-800 shadow-lg transition hover:scale-[1.03] dark:border-zinc-700 dark:bg-zinc-900/95 dark:text-zinc-100"
       >
-        {theme === "dark" ? "Light" : "Dark"}
+        {theme === "dark" ? (
+          <FiSun className="h-5 w-5" aria-hidden />
+        ) : (
+          <FiMoon className="h-5 w-5" aria-hidden />
+        )}
       </button>
       <main className="mx-auto max-w-7xl px-4 md:px-6 xl:px-8">
         <AboutSection content={aboutContent} />
