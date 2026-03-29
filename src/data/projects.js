@@ -448,7 +448,9 @@ export const projects = [
     video: null,
     demoImage: null,
     images: [],
-    links: [],
+    links: [
+      { type: "github", label: "GitHub", href: "https://github.com/aoaye/dbs_creditunion"},
+    ],
     challenges: [
       {
         title: "Layered architecture maintainability",
