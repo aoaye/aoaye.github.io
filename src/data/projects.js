@@ -449,7 +449,11 @@ export const projects = [
     demoImage: null,
     images: [],
     links: [
-      { type: "github", label: "GitHub", href: "https://github.com/aoaye/dbs_creditunion"},
+      {
+        type: "github",
+        label: "GitHub",
+        href: "https://github.com/aoaye/dbs_creditunion",
+      },
     ],
     challenges: [
       {
