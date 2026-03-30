@@ -64,7 +64,7 @@ export const heroContent = {
 }
 
 export const aboutContent =
-  "A results-driven developer focused on building real-world systems combining machine learning, full-stack engineering, and product design. Passionate about solving practical problems through scalable and user-focused solutions."
+  "I build end-to-end systems that don’t just work in theory, but run in the real world. My work sits at the intersection of machine learning, full-stack development, and product design—taking ideas from data and models all the way to deployed applications people can actually use. From training deep learning models, to designing APIs, handling deployment constraints, and building user-facing interfaces, I focus on the full lifecycle of a system. I’m particularly interested in solving practical problems where engineering decisions matter—performance, scalability, and usability, not just model accuracy."
 
 export const techStackContent = {
   languages: ["Python", "JavaScript", "C#", "PHP", "R", "SQL", "HTML", "CSS"],
